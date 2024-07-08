@@ -1,6 +1,8 @@
 <mat-card class="product-card">
     <mat-card-content>
-        <img class="product-card__image " mat-card-image src="https://www.istore.co.za/media/catalog/product/cache/4ebc814e413626645aa42e369230a31f/i/p/iphone_14_plus_blue-5_2.jpg" alt="{{ product.productName }}">
+        <img class="product-card__image" mat-card-image 
+        src="{{ product.images && product.images.length > 0 ? product.images[0].url : 'https://i.pinimg.com/originals/7d/03/1d/7d031d9112aba2292f2d9237aecc6623.png' }}" 
+        alt="{{ product.productName }}">
         <div class="product-card__content">
             <h4 class="product-card__title">{{ product.productName }}</h4>
             <p class="product-card__price">C${{ product.unitPrice }}</p>

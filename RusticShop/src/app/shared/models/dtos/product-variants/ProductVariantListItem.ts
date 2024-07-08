@@ -1,3 +1,5 @@
+import { ProductImage } from '../../ProductImage';
+
 export interface ProductVariantListItem {
   id: number;
   productName: string;
@@ -6,4 +8,5 @@ export interface ProductVariantListItem {
   unitPrice: number;
   stock: number;
   isPublished: boolean;
+  images: ProductImage[];
 }
