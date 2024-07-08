@@ -1,3 +1,13 @@
-<mat-card>
-
+<mat-card class="product-card">
+    <mat-card-content>
+        <img class="product-card__image " mat-card-image src="https://www.istore.co.za/media/catalog/product/cache/4ebc814e413626645aa42e369230a31f/i/p/iphone_14_plus_blue-5_2.jpg" alt="{{ product.productName }}">
+        <div class="product-card__content">
+            <h4 class="product-card__title">{{ product.productName }}</h4>
+            <p class="product-card__price">C${{ product.unitPrice }}</p>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button class="button_card" mat-button>Ver</button>
+        <button class="button_card" mat-button>Añadir</button>
+    </mat-card-actions>
 </mat-card>

@@ -9,5 +9,7 @@ namespace RusticShopAPI.Data.Models.DTOs.ProductDtos
         public long Stock { get; set; }
         public decimal UnitPrice { get; set; }
         public bool IsPublished { get; set; }
+        public ICollection<ProductImageDto>? Images { get; set; }
+
     }
 }

@@ -64,6 +64,7 @@ namespace RusticShopAPI.Controllers
             string? filterQuery = null)
         {
             var source = _context.ProductVariants
+                .Include(pv => pv.Images)
               .Include(pv => pv.Product)
                 .ThenInclude(p => p!.Brand)
               .AsNoTracking()

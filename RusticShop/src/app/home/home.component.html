@@ -1,1 +1,8 @@
-<p>home works!</p>
+<div *ngIf="products.length > 0">
+    <div *ngFor="let product of products">
+        <app-product-card [product]="product"></app-product-card>
+    </div>
+</div>
+<div *ngIf="products.length === 0">
+    <p>No se encontraron productos.</p>
+</div>
