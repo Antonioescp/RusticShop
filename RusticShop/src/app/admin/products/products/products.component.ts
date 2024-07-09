@@ -39,6 +39,8 @@ import {
 export class ProductsComponent implements AfterViewInit {
   @ViewChild(TableComponent) crud!: TableComponent<Product>;
 
+  isFetchingData = true;
+
   columns: TableColumnDef<Product>[] = [
     {
       def: 'id',
@@ -126,6 +128,9 @@ export class ProductsComponent implements AfterViewInit {
         },
         error: error => {
           console.error(error);
+        },
+        complete: () => {
+          this.isFetchingData = false;
         },
       });
   }

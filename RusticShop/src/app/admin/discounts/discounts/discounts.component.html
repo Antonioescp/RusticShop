@@ -3,5 +3,7 @@
   [columns]="columns"
   [rowActions]="rowActions"
   [tableActions]="tableActions"
+  filterColumn="name"
+  [(isFetchingData)]="isFetchingData"
   [displayedColumns]="displayedColumns"
   (fetchData)="fetchData($event)"></app-table>

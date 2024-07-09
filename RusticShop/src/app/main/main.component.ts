@@ -17,7 +17,7 @@ export class MainComponent {
 
   logout() {
     this.auth.logout();
-    this.router.navigateByUrl('/Users/auth/login');
+    this.router.navigateByUrl('/');
     this.snackBar.open('Sesión cerrada con éxito');
   }
 }

@@ -29,6 +29,8 @@ import {
 export class AttributesComponent implements AfterViewInit {
   @ViewChild(TableComponent) table!: TableComponent<Attribute>;
 
+  isFetchingData = true;
+
   columns: TableColumnDef<Attribute>[] = [
     {
       def: 'id',
@@ -89,6 +91,9 @@ export class AttributesComponent implements AfterViewInit {
         },
         error: error => {
           console.error(error);
+        },
+        complete: () => {
+          this.isFetchingData = false;
         },
       });
   }

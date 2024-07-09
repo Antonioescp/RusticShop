@@ -4,4 +4,6 @@
   [tableActions]="tableActions"
   [rowActions]="rowActions"
   [displayedColumns]="displayedColumns"
+  filterColumn="name"
+  [(isFetchingData)]="isFetchingData"
   (fetchData)="fetchData($event)"></app-table>

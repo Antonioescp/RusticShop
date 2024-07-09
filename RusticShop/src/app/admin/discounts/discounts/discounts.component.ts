@@ -29,6 +29,8 @@ import {
 export class DiscountsComponent implements AfterViewInit {
   @ViewChild(TableComponent) table!: TableComponent<Discount>;
 
+  isFetchingData = true;
+
   columns: TableColumnDef<Discount>[] = [
     {
       def: 'id',
@@ -95,6 +97,9 @@ export class DiscountsComponent implements AfterViewInit {
         },
         error: error => {
           console.error(error);
+        },
+        complete: () => {
+          this.isFetchingData = false;
         },
       });
   }

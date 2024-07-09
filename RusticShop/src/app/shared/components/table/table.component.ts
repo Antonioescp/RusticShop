@@ -4,12 +4,19 @@ import {
   ViewChild,
   Output,
   EventEmitter,
+  OnInit,
 } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import {
+  MatPaginator,
+  MatPaginatorIntl,
+  PageEvent,
+} from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Pagination } from 'src/app/services/categories.service';
 import { PaginatedResponse } from '../../models/dtos/PaginatedResponse';
+import { FormControl } from '@angular/forms';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 export interface TableColumnDef<Model> {
   def: string;
@@ -39,7 +46,7 @@ export interface TableActionDef {
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent<Model> {
+export class TableComponent<Model> implements OnInit {
   @Input() columns: TableColumnDef<Model>[] = [];
   @Input() displayedColumns: string[] = [];
 
@@ -56,11 +63,14 @@ export class TableComponent<Model> {
   @Input() sortColumn = '';
   @Input() sortOrder: 'asc' | 'desc' = 'asc';
   @Input() filterColumn = '';
+
   @Input() filterQuery?: string;
+  debounceFilterQueryControl = new FormControl();
 
   @Input() title?: string;
 
-  isFetchingData = false;
+  @Input() isFetchingData = false;
+  @Output() isFetchingDataChange = new EventEmitter<boolean>();
 
   @Output() fetchData = new EventEmitter<PageEvent>();
 
@@ -68,6 +78,12 @@ export class TableComponent<Model> {
   @ViewChild(MatSort) sort!: MatSort;
 
   dataSource = new MatTableDataSource<Model>([]);
+
+  ngOnInit(): void {
+    this.debounceFilterQueryControl.valueChanges
+      .pipe(debounceTime(500), distinctUntilChanged())
+      .subscribe(this.loadData.bind(this));
+  }
 
   public loadData(query?: string): void {
     const pageEvent = new PageEvent();
@@ -78,7 +94,7 @@ export class TableComponent<Model> {
   }
 
   getData(pageEvent: PageEvent) {
-    this.isFetchingData = true;
+    this.isFetchingDataChange.emit(true);
     this.fetchData.emit(pageEvent);
   }
 
@@ -99,6 +115,6 @@ export class TableComponent<Model> {
     this.paginator.pageIndex = result.pageIndex;
     this.paginator.pageSize = result.pageSize;
     this.dataSource.data = result.data;
-    this.isFetchingData = false;
+    this.isFetchingDataChange.emit(false);
   }
 }

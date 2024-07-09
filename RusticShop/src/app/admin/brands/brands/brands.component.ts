@@ -29,6 +29,8 @@ import { PageEvent } from '@angular/material/paginator';
 export class BrandsComponent implements AfterViewInit {
   @ViewChild(TableComponent) table!: TableComponent<Brand>;
 
+  isFetchingData = true;
+
   columns: TableColumnDef<Brand>[] = [
     {
       def: 'id',
@@ -88,6 +90,7 @@ export class BrandsComponent implements AfterViewInit {
           this.table.updateWithResults(paginatedBrands);
         },
         error: error => console.error(error),
+        complete: () => (this.isFetchingData = false),
       });
   }
 

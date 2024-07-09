@@ -20,6 +20,7 @@ import {
 } from './guards/auth.guard';
 import { SalesTableComponent } from './admin/sales-table/sales-table.component';
 import { NotFoundPageComponent } from './shared/not-found-page/not-found-page.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
@@ -69,8 +70,13 @@ const routes: Routes = [
     ],
   },
   {
+    path: 'home',
+    component: MainComponent,
+    children: [{ path: 'catalog', component: HomeComponent }],
+  },
+  {
     path: '',
-    redirectTo: '/admin/panel',
+    redirectTo: '/home/catalog',
     pathMatch: 'full',
   },
   {

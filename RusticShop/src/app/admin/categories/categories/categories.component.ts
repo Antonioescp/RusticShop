@@ -29,6 +29,8 @@ import { PageEvent } from '@angular/material/paginator';
 export class CategoriesComponent implements AfterViewInit {
   @ViewChild(TableComponent) table!: TableComponent<Category>;
 
+  isFetchingData = true;
+
   columns: TableColumnDef<Category>[] = [
     {
       def: 'id',
@@ -95,6 +97,9 @@ export class CategoriesComponent implements AfterViewInit {
         },
         error: error => {
           console.error(error);
+        },
+        complete: () => {
+          this.isFetchingData = false;
         },
       });
   }

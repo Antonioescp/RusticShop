@@ -24,6 +24,8 @@ import { ReportServiceService } from 'src/app/services/report-service.service';
 export class SalesTableComponent implements AfterViewInit {
   @ViewChild(TableComponent) crud!: TableComponent<OrderDetailsDto>;
 
+  isFetchingData = true;
+
   columns: TableColumnDef<OrderDetailsDto>[] = [
     {
       def: 'id',
@@ -95,8 +97,13 @@ export class SalesTableComponent implements AfterViewInit {
   fetchData(pageEvent: PageEvent) {
     this.orderService
       .getPaginatedOrderDetails(this.crud.getPagination(pageEvent))
-      .subscribe(response => {
-        this.crud.updateWithResults(response);
+      .subscribe({
+        next: response => {
+          this.crud.updateWithResults(response);
+        },
+        complete: () => {
+          this.isFetchingData = false;
+        },
       });
   }
 

@@ -2,5 +2,7 @@
   title="Ordenes"
   [columns]="columns"
   [displayedColumns]="displayedColumns"
+  filterColumn="userFullName"
+  [(isFetchingData)]="isFetchingData"
   [rowActions]="actions"
   (fetchData)="fetchData($event)"></app-table>

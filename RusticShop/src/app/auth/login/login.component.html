@@ -2,6 +2,15 @@
   <mat-card-content>
     <button
       [disabled]="isBusy"
+      matTooltip="Ir a inicio"
+      class="back-button"
+      mat-icon-button
+      [routerLink]="['/']">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+
+    <button
+      [disabled]="isBusy"
       matTooltip="Ir a registro"
       class="register-button"
       mat-icon-button

@@ -22,8 +22,7 @@
   <mat-form-field>
     <input
       matInput
-      #filter
-      (keyup)="loadData(filter.value)"
+      [formControl]="debounceFilterQueryControl"
       placeholder="Filtrar por nombre" />
   </mat-form-field>
 

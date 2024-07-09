@@ -4,4 +4,6 @@
   [displayedColumns]="displayedColumns"
   [tableActions]="tableActions"
   [rowActions]="rowActions"
+  filterColumn="sku"
+  [(isFetchingData)]="isFetchingData"
   (fetchData)="fetchData($event)"></app-table>

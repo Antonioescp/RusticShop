@@ -50,6 +50,8 @@ import {
 export class ProductVariantsComponent implements AfterViewInit {
   @ViewChild(TableComponent) table!: TableComponent<ProductVariantListItem>;
 
+  isFetchingData = true;
+
   columns: TableColumnDef<ProductVariantListItem>[] = [
     {
       def: 'id',
@@ -158,6 +160,9 @@ export class ProductVariantsComponent implements AfterViewInit {
         },
         error: error => {
           console.error(error);
+        },
+        complete: () => {
+          this.isFetchingData = false;
         },
       });
   }

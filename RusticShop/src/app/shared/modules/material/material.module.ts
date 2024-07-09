@@ -10,7 +10,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import {
+  MatPaginatorIntl,
+  MatPaginatorModule,
+} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -57,12 +60,25 @@ const materialModules = [
   MatGridListModule,
 ];
 
+function getSpanishPaginatorIntl() {
+  const paginatorIntl = new MatPaginatorIntl();
+
+  paginatorIntl.itemsPerPageLabel = 'Registros por página:';
+  paginatorIntl.nextPageLabel = 'Siguiente página';
+  paginatorIntl.previousPageLabel = 'Página anterior';
+  paginatorIntl.firstPageLabel = 'Primera página';
+  paginatorIntl.lastPageLabel = 'Última página';
+
+  return paginatorIntl;
+}
+
 @NgModule({
   declarations: [],
   imports: [CommonModule, ...materialModules],
   exports: [...materialModules],
   providers: [
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } },
+    { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() },
   ],
 })
 export class MaterialModule {}
